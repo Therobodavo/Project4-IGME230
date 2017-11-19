@@ -1,6 +1,6 @@
 # Project4-IGME230 Proposal, David Knolls
 
-	My project idea is a simple game/simulation where the user can click to create various shapes, let go to drop them and have them
+My project idea is a simple game/simulation where the user can click to create various shapes, let go to drop them and have them
 stack up. This would involve canvas to draw the shapes through clicking, an animation for the shapes to fall, some way of checking the
 surrounding shapes for them to react in some way, and a way of stopping the game/simulation. This would also allow for various changes, as
 I could use svg.js instead of canvas, and I could add in different abilities/reactions with the shapes. Another feature would be varying
