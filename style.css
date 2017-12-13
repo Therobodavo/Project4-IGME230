@@ -18,3 +18,14 @@ body
     height: 100%;
     color: black;
 }
+.heading
+{
+    margin: 0 auto;
+    background-color: green;
+    width: 40%;
+    border-radius: 25px;
+}
+.heading->h1,.heading->h2
+{
+    text-align: center;
+}
