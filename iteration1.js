@@ -66,6 +66,14 @@
 				   allShapes[i] != allShapes[j])
 				{
 					canMoveDown = false;
+				}
+				if(!canMoveDown && allShapes[i].y + 51 === allShapes[j].y - 1)
+				{
+					allShapes[i].y += 1;
+					break;
+				}
+				else if(!canMoveDown)
+				{
 					break;
 				}
 			}
@@ -83,4 +91,6 @@
 	{
 		ctx.fillStyle = color;
 		ctx.fillRect(x,y,50,50);
+		ctx.fillStyle = 'black';
+		ctx.strokeRect(x - 1,y - 1,52,52);
 	}
