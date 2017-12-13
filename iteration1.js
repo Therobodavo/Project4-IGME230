@@ -18,7 +18,7 @@
 			lastClick = time;
 		}
 	},false);
-	
+	document.querySelector("#btnReset").onclick = function(e){allShapes = [];};
 	var FPS = 30;
 	
 	setInterval(function()
