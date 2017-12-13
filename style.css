@@ -1,0 +1,24 @@
+body
+{
+    background-color: lightgrey;
+}
+#iterations
+{
+    display:flex;
+    flex-wrap: wrap;
+    column-count: 3;
+    margin: 0 auto;
+    text-align: center;
+}
+#iteration1, #iteration2, #iteration3
+{
+    width: 30%;
+    background-color: red;
+    margin: 0 auto;
+    height: 100%;
+    color: black;
+}
+a:link
+{
+    text-decoration: none;
+}
