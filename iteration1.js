@@ -34,6 +34,12 @@
 		ctx.fillStyle = 'gray';
 		ctx.fillRect(0,0,800,1000);
 		
+		ctx.fillStyle = 'black';
+		ctx.beginPath();
+		ctx.goTo(0,50);
+		ctx.lineTo(800,50);
+		ctx.stroke();
+		
 		for(let i = 0; i < allShapes.length; i++)
 		{
 			drawRect(allShapes[i].x,allShapes[i].y,allShapes[i].color);
