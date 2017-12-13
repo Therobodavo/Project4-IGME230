@@ -3,7 +3,7 @@
 	canvas.width = '800';
 	canvas.height = '1000';
 	let allShapes = [];
-	let clickDelay = 60;
+	let clickDelay = 30;
 	let lastClick = 0;
 	let time = 0;
 	let canClick = true;
@@ -48,7 +48,7 @@
 		}
 		for(let i = 0; i < allShapes.length; i++)
 		{
-			allShapes[i].y += 2;
+			allShapes[i].y += 4;
 		}
 	}
 	function drawRect(x,y,color)
