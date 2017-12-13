@@ -13,7 +13,7 @@
 		if(canClick)
 		{
 			//add shape locations to list
-			allShapes.push({x:e.offsetX,y:e.offsetY,type:"square",color:'red'});
+			allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:'red'});
 			canClick = false;
 			lastClick = time;
 		}
