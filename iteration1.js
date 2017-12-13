@@ -6,11 +6,17 @@
 	let clickDelay = 60;
 	let lastClick = 0;
 	let time = 0;
+	let canClick = true;
 	
 	canvas.addEventListener('click',function(e)
 	{
-		//add shape locations to list
-		allShapes.push({x:e.offsetX,y:e.offsetY,type:"square",color:'red'});
+		if(canClick)
+		{
+			//add shape locations to list
+			allShapes.push({x:e.offsetX,y:e.offsetY,type:"square",color:'red'});
+			canClick = false;
+			lastClick = time;
+		}
 	},false);
 	
 	var FPS = 30;
@@ -36,6 +42,10 @@
 	function update()
 	{
 		time++;
+		if(time - lastClick >= clickDelay)
+		{
+			canClick = true;
+		}
 		for(let i = 0; i < allShapes.length; i++)
 		{
 			allShapes[i].y += 2;
