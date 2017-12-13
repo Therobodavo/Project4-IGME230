@@ -12,8 +12,21 @@ canvas.addEventListener('click',function(e)
 {
 	if(canClick)
 	{
+		let color = Math.round(Math.random() * 3);
+		if(color === 0 || color === 3)
+		{
+			color = 'red';
+		}
+		else if(color === 1)
+		{
+			color = 'green';
+		}
+		else if(color === 2)
+		{
+			color = 'blue';
+		}
 		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:'red'});
+		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color});
 		canClick = false;
 		lastClick = time;
 	}
