@@ -1,7 +1,7 @@
 	let canvas = document.getElementById('main');
 	let ctx = canvas.getContext('2d');
-	canvas.width = '800';
-	canvas.height = '1000';
+	canvas.width = '600';
+	canvas.height = '500';
 	let allShapes = [];
 	let clickDelay = 30;
 	let lastClick = 0;
@@ -32,12 +32,12 @@
 	{
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.fillStyle = 'gray';
-		ctx.fillRect(0,0,800,1000);
+		ctx.fillRect(0,0,600,500);
 		
 		ctx.fillStyle = 'black';
 		ctx.beginPath();
 		ctx.moveTo(0,100);
-		ctx.lineTo(800,100);
+		ctx.lineTo(600,100);
 		ctx.stroke();
 
 		for(let i = 0; i < allShapes.length; i++)
@@ -54,11 +54,11 @@
 		}
 		for(let i = 0; i < allShapes.length; i++)
 		{
-			allShapes[i].y += 4;
+			allShapes[i].y += 2;
 		}
 	}
 	function drawRect(x,y,color)
 	{
 		ctx.fillStyle = color;
-		ctx.fillRect(x,y,100,100);
+		ctx.fillRect(x,y,50,50);
 	}
