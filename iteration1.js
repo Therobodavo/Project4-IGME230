@@ -33,7 +33,18 @@
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.fillStyle = 'gray';
 		ctx.fillRect(0,0,canvas.width,canvas.height);
+
+		//Set color for clicking area
+		if(canClick)
+		{
+			ctx.fillStyle = '#96df96';
+		}
+		else
+		{
+			ctx.fillStyle = '#df7866'
+		}
 		
+		ctx.fillRect(0,0,canvas.width,100);
 		ctx.fillStyle = 'black';
 		ctx.beginPath();
 		ctx.moveTo(0,100);
