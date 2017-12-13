@@ -7,6 +7,16 @@ let clickDelay = 30;
 let lastClick = 0;
 let time = 0;
 let canClick = true;
+var img = new Image();
+img.src = "crane.svg";
+let mouseX = 0;
+let mouseY = 0;
+
+canvas.addEventListener('mousemove',function(e)
+{
+	mouseX = e.offsetX;
+	mouseY = e.offsetY;
+},false)
 
 canvas.addEventListener('click',function(e)
 {
@@ -64,6 +74,8 @@ function draw()
 	ctx.lineTo(canvas.width,100);
 	ctx.stroke();
 
+	//Crane
+	ctx.drawImage(img,mouseX,85);
 	for(let i = 0; i < allShapes.length; i++)
 	{
 		drawRect(allShapes[i].x,allShapes[i].y,allShapes[i].color);
