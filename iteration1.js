@@ -62,7 +62,8 @@
 				if(allShapes[i].x < allShapes[j].x + 50 &&
 				   allShapes[i].x + 50 > allShapes[j].x &&
 				   tempYTop < allShapes[j].y + 50 &&
-				   tempYBottom > allShapes[j].y)
+				   tempYBottom > allShapes[j].y &&
+				   allShapes[i] != allShapes[j])
 				{
 					canMoveDown = false;
 					break;
