@@ -25,7 +25,15 @@ body
     width: 40%;
     border-radius: 25px;
 }
-.heading->h1,.heading->h2
+.headingText
 {
     text-align: center;
+}
+h2
+{
+    margin-top: 0px;
+}
+h1
+{
+    margin-bottom: 5px;
 }
