@@ -14,6 +14,10 @@ let mouseY = 0;
 let filled = false;
 let idNum = 0;
 
+document.querySelector(".header").onclick = function(e)
+{
+    window.location = "index.html";
+}
 canvas.addEventListener('mousemove',function(e)
 {
 	mouseX = e.offsetX;

@@ -1,6 +1,7 @@
 body
 {
     background-color: lightgrey;
+    height: 100%;
 }
 #iterations
 {
@@ -14,18 +15,23 @@ body
 {
     width: 30%;
     margin: 0 auto;
-    height: 100%;
     color: black;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 #iteration1:hover, #iteration2:hover, #iteration3:hover
 {
     background-color: white;
     cursor: pointer;
 }
+.heading:hover
+{
+    background-color: darkgreen;
+    cursor: pointer;
+}
 .heading
 {
     margin: 0 auto;
-    background-color: green;
     width: 40%;
     border-radius: 25px;
 }
@@ -44,4 +50,17 @@ h1
 .bodyText
 {
     text-align: left;
+}
+footer
+{
+    width: 100%;
+    padding: 5px;
+    background-color: seagreen;
+    text-align: center;
+}
+.headingBack
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: seagreen;
 }
