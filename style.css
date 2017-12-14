@@ -51,6 +51,11 @@ h1
 {
     text-align: left;
 }
+.subHeader
+{
+    margin: 0 auto;
+    text-align: center;
+}
 footer
 {
     width: 100%;
