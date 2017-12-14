@@ -61,7 +61,7 @@ canvas.addEventListener('click',function(e)
 	if(canClick && !filled)
 	{
 		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color,id:idNum,canMove:true});
+		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:nextType,color:nextColor,id:idNum,canMove:true});
 		idNum++;
 		canClick = false;
 		lastClick = time;
@@ -116,7 +116,18 @@ function draw()
 	ctx.drawImage(img,(Math.floor(mouseX/50) * 50) + 10,85);
 	for(let i = 0; i < allShapes.length; i++)
 	{
-		drawRect(allShapes[i].x,allShapes[i].y,allShapes[i].color);
+		if(allShapes[i].type === "square")
+		{
+			drawRect(allShapes[i].x,allShapes[i].y,allShapes[i].color);
+		}
+		else if(allShapes[i].type === "triangle")
+		{
+
+		}
+		else if(allShapes[i].type === "circle")
+		{
+
+		}
 	}
 }
 function update()
