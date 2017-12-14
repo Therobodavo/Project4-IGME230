@@ -11,7 +11,7 @@
 	document.querySelector(".header").onclick = function(e)
 	{
 		window.location = "index.html";
-	}
+	};
 	canvas.addEventListener('click',function(e)
 	{
 		if(canClick)

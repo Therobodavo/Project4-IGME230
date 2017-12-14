@@ -66,7 +66,7 @@ function randomizeShape()
 document.querySelector(".header").onclick = function(e)
 {
     window.location = "index.html";
-}
+};
 canvas.addEventListener('mousemove',function(e)
 {
 	mouseX = e.offsetX;
