@@ -13,6 +13,7 @@ let mouseX = 0;
 let mouseY = 0;
 let filled = false;
 let idNum = 0;
+let timeTillDrop = 5
 
 //Creates first color and shape
 let nextColor;
@@ -87,7 +88,7 @@ document.querySelector("#btnReset").onclick = function(e)
 	time = 0;
 	lastClick = 0;
 };
-var FPS = 60;
+let FPS = 60;
 
 setInterval(function()
 {
@@ -111,7 +112,7 @@ function draw()
 	{
 		ctx.fillStyle = '#df7866'
 	}
-	ctx.fillRect(0,0,canvas.width,100);
+	ctx.fillRect(0,50,canvas.width,50);
 	ctx.fillStyle = 'black';
 
 	if(filled)
@@ -123,6 +124,11 @@ function draw()
 	ctx.beginPath();
 	ctx.moveTo(0,100);
 	ctx.lineTo(canvas.width,100);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.moveTo(0,50);
+	ctx.lineTo(canvas.width,50);
 	ctx.stroke();
 
 	//Crane
