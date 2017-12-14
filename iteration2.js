@@ -12,6 +12,7 @@ img.src = "crane.svg";
 let mouseX = 0;
 let mouseY = 0;
 let filled = false;
+let idNum = 0;
 
 canvas.addEventListener('mousemove',function(e)
 {
@@ -40,8 +41,10 @@ canvas.addEventListener('click',function(e)
 		{
 			color = 'orange';
 		}
+
 		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color});
+		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color,id:idNum,canMove:true});
+		idNum++;
 		canClick = false;
 		lastClick = time;
 	}
@@ -105,22 +108,33 @@ function update()
 	{
 		canClick = true;
 	}
+
+	let resetLoop = false;
 	for(let i = 0; i < allShapes.length;i++)
 	{
 		let canMoveDown = true;
 		let tempYTop = allShapes[i].y + 2;
 		let tempYBottom = allShapes[i].y + 52;
+
+		//If one and two spots away there is a match
+		let oneAway = -1;
+		let twoAway = -1;
 		for(let j = 0; j < allShapes.length; j++)
 		{
 			if(allShapes[i].x < allShapes[j].x + 50 &&
 			   allShapes[i].x + 50 > allShapes[j].x &&
 			   tempYTop < allShapes[j].y + 50 &&
 			   tempYBottom > allShapes[j].y &&
-			   allShapes[i] != allShapes[j])
+			   allShapes[i] != allShapes[j]
+			   || allShapes[i].y + 50 >= canvas.height)
 			{
-				canMoveDown = false;
+				allShapes[i].canMove = false;
 			}
-			if(!canMoveDown)
+			else
+			{
+				allShapes[i].canMove = true;
+			}
+			if(!allShapes[i].canMove)
 			{
 				if(allShapes[i].y + 51 === allShapes[j].y - 1)
 				{
@@ -130,16 +144,63 @@ function update()
 				{
 					filled = true;
 				}
+				if(allShapes[i].type === allShapes[j].type && allShapes[i].color === allShapes[j].color && allShapes[j].canMove === false)
+				{
+					if(allShapes[i].x === allShapes[j].x && allShapes[j].y - allShapes[i].y > 45 && allShapes[j].y - allShapes[i].y < 55)
+					{
+						oneAway = allShapes[j].id;
+						for(let s = 0; s < allShapes.length; s++)
+						{
+							if(allShapes[i].type === allShapes[s].type && allShapes[s].color === allShapes[i].color)
+							{
+								if(allShapes[j].x === allShapes[s].x && allShapes[s].y - allShapes[j].y > 45 && allShapes[s].y - allShapes[j].y < 55)
+								{
+									twoAway = allShapes[s].id;
+									for(let b = allShapes.length - 1; b >= 0; b--)
+									{
+										if(b === i)
+										{
+											allShapes.splice(i,1);
+										}
+										else if(b === j)
+										{
+											allShapes.splice(j,1);
+										}
+										else if(b === s)
+										{
+											allShapes.splice(s,1);
+										}
+									}
+									resetLoop = true;
+									break;
+								}
+							}
+						}
+						if(resetLoop)
+						{
+							break;
+						}
+					}
+				}
 				break;
 			}
 		}
-		if(canMoveDown && allShapes[i].y + 52 <= canvas.height)
+		if(resetLoop)
+		{
+			break;
+		}
+		if(allShapes[i].canMove && allShapes[i].y + 52 <= canvas.height)
 		{
 			allShapes[i].y += 2;
+			if(allShapes[i].y + 50 === canvas.height)
+			{
+				allShapes[i].canMove = false;
+			}
 		}
-		else if(allShapes[i].y > canvas.height)
+		else if(allShapes[i].y  + 50 > canvas.height)
 		{
 			allShapes[i].y = canvas.height - 50;
+			allShapes[i].canMove = false;
 		}
 	}
 }
