@@ -72,10 +72,12 @@ canvas.addEventListener('click',function(e)
 	if(canClick && !filled)
 	{
 		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:nextType,color:nextColor,id:idNum,canMove:true});
+		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:nextShape,color:nextColor,id:idNum,canMove:true});
 		idNum++;
 		canClick = false;
 		lastClick = time;
+		randomizeShape();
+		randomizeColor();
 	}
 },false);
 document.querySelector("#btnReset").onclick = function(e)
