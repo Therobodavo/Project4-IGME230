@@ -14,6 +14,42 @@ let mouseY = 0;
 let filled = false;
 let idNum = 0;
 
+//Creates first color and shape
+let nextColor = Math.round(Math.random() * 4);
+let nextShape = Math.round(Math.random() * 3);
+
+//Sets first color
+if(nextColor === 0 || nextColor === 4)
+{
+	nextColor = 'red';
+}
+else if(nextColor === 1)
+{
+	nextColor = 'green';
+}
+else if(nextColor === 2)
+{
+	nextColor = 'blue';
+}
+else if(nextColor === 3)
+{
+	nextColor = 'orange';
+}
+
+//Sets first shape
+if(nextShape === 0 || nextShape === 3)
+{
+	nextShape = "square";
+}
+else if(nextShape === 1)
+{
+	nextShape = "triangle";
+}
+else if(nextShape === 2)
+{
+	nextShape = "circle";
+}
+
 canvas.addEventListener('mousemove',function(e)
 {
 	mouseX = e.offsetX;
@@ -24,26 +60,8 @@ canvas.addEventListener('click',function(e)
 {
 	if(canClick && !filled)
 	{
-		let color = Math.round(Math.random() * 4);
-		if(color === 0 || color === 4)
-		{
-			color = 'red';
-		}
-		else if(color === 1)
-		{
-			color = 'green';
-		}
-		else if(color === 2)
-		{
-			color = 'blue';
-		}
-		else if(color === 3)
-		{
-			color = 'orange';
-		}
-
 		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:'red',id:idNum,canMove:true});
+		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color,id:idNum,canMove:true});
 		idNum++;
 		canClick = false;
 		lastClick = time;
@@ -226,6 +244,86 @@ function update()
 							if(allShapes[j].type === allShapes[s].type && allShapes[j].color === allShapes[s].color)
 							{
 								if(allShapes[j].y - allShapes[s].y >= -1 && allShapes[j].y - allShapes[s].y <= 1 && allShapes[j].x - allShapes[s].x > 45 && allShapes[j].x - allShapes[s].x < 55)
+								{
+									twoAway = allShapes[s].id;
+									for(let b = allShapes.length - 1; b >= 0; b--)
+									{
+										if(b === i)
+										{
+											allShapes.splice(i,1);
+										}
+										else if(b === j)
+										{
+											allShapes.splice(j,1);
+										}
+										else if(b === s)
+										{
+											allShapes.splice(s,1);
+										}
+									}
+									resetLoop = true;
+									break;
+								}
+							}
+						}
+					}
+					if(resetLoop)
+					{
+						break;
+					}
+				}
+
+				//Diagonal Left-Up Checking
+				if(allShapes[i].y - allShapes[j].y >= 45 && allShapes[i].y - allShapes[j].y <= 55 && allShapes[i].x - allShapes[j].x > 45 && allShapes[i].x - allShapes[j].x < 55)
+				{
+					oneAway = allShapes[j].id;
+					for(let s = 0; s < allShapes.length; s++)
+					{
+						if(!allShapes[s].canMove)
+						{
+							if(allShapes[j].type === allShapes[s].type && allShapes[j].color === allShapes[s].color)
+							{
+								if(allShapes[j].y - allShapes[s].y >= 45 && allShapes[j].y - allShapes[s].y <= 55 && allShapes[j].x - allShapes[s].x > 45 && allShapes[j].x - allShapes[s].x < 55)
+								{
+									twoAway = allShapes[s].id;
+									for(let b = allShapes.length - 1; b >= 0; b--)
+									{
+										if(b === i)
+										{
+											allShapes.splice(i,1);
+										}
+										else if(b === j)
+										{
+											allShapes.splice(j,1);
+										}
+										else if(b === s)
+										{
+											allShapes.splice(s,1);
+										}
+									}
+									resetLoop = true;
+									break;
+								}
+							}
+						}
+					}
+					if(resetLoop)
+					{
+						break;
+					}
+				}
+
+				//Diagonal Right-Up Checking
+				if(allShapes[i].y - allShapes[j].y >= 45 && allShapes[i].y - allShapes[j].y <= 55 && allShapes[j].x - allShapes[i].x > 45 && allShapes[j].x - allShapes[i].x < 55)
+				{
+					oneAway = allShapes[j].id;
+					for(let s = 0; s < allShapes.length; s++)
+					{
+						if(!allShapes[s].canMove)
+						{
+							if(allShapes[j].type === allShapes[s].type && allShapes[j].color === allShapes[s].color)
+							{
+								if(allShapes[j].y - allShapes[s].y >= 45 && allShapes[j].y - allShapes[s].y <= 55 && allShapes[s].x - allShapes[j].x > 45 && allShapes[s].x - allShapes[j].x < 55)
 								{
 									twoAway = allShapes[s].id;
 									for(let b = allShapes.length - 1; b >= 0; b--)
