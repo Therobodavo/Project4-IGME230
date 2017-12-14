@@ -43,7 +43,7 @@ canvas.addEventListener('click',function(e)
 		}
 
 		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color,id:idNum,canMove:true});
+		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:'red',id:idNum,canMove:true});
 		idNum++;
 		canClick = false;
 		lastClick = time;
@@ -144,16 +144,48 @@ function update()
 				{
 					filled = true;
 				}
-				if(allShapes[i].type === allShapes[j].type && allShapes[i].color === allShapes[j].color && allShapes[j].canMove === false)
+				break;
+			}
+		}
+		if(allShapes[i].canMove && allShapes[i].y + 52 <= canvas.height)
+		{
+			allShapes[i].y += 2;
+			if(allShapes[i].y + 50 === canvas.height)
+			{
+				allShapes[i].canMove = false;
+			}
+		}
+		else if(allShapes[i].y  + 50 > canvas.height)
+		{
+			allShapes[i].y = canvas.height - 50;
+			allShapes[i].canMove = false;
+		}
+	}
+
+	//collision removal detection
+
+	//Goes through each shape
+	for(let i = 0; i < allShapes.length; i++)
+	{
+		//Goes through each shape again, being compared to the first loops shape
+		for(let j = 0; j < allShapes.length; j++)
+		{
+			//Checks the 2 shapes are the same type of shape and color
+			if(allShapes[i].type === allShapes[j].type && allShapes[i].color === allShapes[j].color && allShapes[j].canMove === false && allShapes[i].canMove === false)
+			{
+				//Vertical checking
+
+				//if both shapes have the same x, and they are within 50 pixels in the y
+				if(allShapes[i].x === allShapes[j].x && allShapes[i].y - allShapes[j].y > 45 && allShapes[i].y - allShapes[j].y < 55)
 				{
-					if(allShapes[i].x === allShapes[j].x && allShapes[j].y - allShapes[i].y > 45 && allShapes[j].y - allShapes[i].y < 55)
+					oneAway = allShapes[j].id;
+					for(let s = 0; s < allShapes.length; s++)
 					{
-						oneAway = allShapes[j].id;
-						for(let s = 0; s < allShapes.length; s++)
+						if(!allShapes[s].canMove)
 						{
 							if(allShapes[i].type === allShapes[s].type && allShapes[s].color === allShapes[i].color)
 							{
-								if(allShapes[j].x === allShapes[s].x && allShapes[s].y - allShapes[j].y > 45 && allShapes[s].y - allShapes[j].y < 55)
+								if(allShapes[j].x === allShapes[s].x && allShapes[j].y - allShapes[s].y > 45 && allShapes[j].y - allShapes[s].y < 55)
 								{
 									twoAway = allShapes[s].id;
 									for(let b = allShapes.length - 1; b >= 0; b--)
@@ -176,31 +208,57 @@ function update()
 								}
 							}
 						}
-						if(resetLoop)
-						{
-							break;
-						}
+					}
+					if(resetLoop)
+					{
+						break;
 					}
 				}
-				break;
+
+				//Horizontal Checking
+				if(allShapes[i].y - allShapes[j].y >= -1 && allShapes[i].y - allShapes[j].y <= 1 && allShapes[i].x - allShapes[j].x > 45 && allShapes[i].x - allShapes[j].x < 55)
+				{
+					oneAway = allShapes[j].id;
+					for(let s = 0; s < allShapes.length; s++)
+					{
+						if(!allShapes[s].canMove)
+						{
+							if(allShapes[j].type === allShapes[s].type && allShapes[j].color === allShapes[s].color)
+							{
+								if(allShapes[j].y - allShapes[s].y >= -1 && allShapes[j].y - allShapes[s].y <= 1 && allShapes[j].x - allShapes[s].x > 45 && allShapes[j].x - allShapes[s].x < 55)
+								{
+									twoAway = allShapes[s].id;
+									for(let b = allShapes.length - 1; b >= 0; b--)
+									{
+										if(b === i)
+										{
+											allShapes.splice(i,1);
+										}
+										else if(b === j)
+										{
+											allShapes.splice(j,1);
+										}
+										else if(b === s)
+										{
+											allShapes.splice(s,1);
+										}
+									}
+									resetLoop = true;
+									break;
+								}
+							}
+						}
+					}
+					if(resetLoop)
+					{
+						break;
+					}
+				}
 			}
 		}
 		if(resetLoop)
 		{
 			break;
-		}
-		if(allShapes[i].canMove && allShapes[i].y + 52 <= canvas.height)
-		{
-			allShapes[i].y += 2;
-			if(allShapes[i].y + 50 === canvas.height)
-			{
-				allShapes[i].canMove = false;
-			}
-		}
-		else if(allShapes[i].y  + 50 > canvas.height)
-		{
-			allShapes[i].y = canvas.height - 50;
-			allShapes[i].canMove = false;
 		}
 	}
 }
