@@ -13,7 +13,8 @@ let mouseX = 0;
 let mouseY = 0;
 let filled = false;
 let idNum = 0;
-let timeTillDrop = 5
+let timeTillDrop = 300;
+let score = 0;
 
 //Creates first color and shape
 let nextColor;
@@ -70,24 +71,37 @@ canvas.addEventListener('mousemove',function(e)
 
 canvas.addEventListener('click',function(e)
 {
-	if(canClick && !filled)
-	{
-		//add shape locations to list
-		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:nextShape,color:nextColor,id:idNum,canMove:true});
-		idNum++;
-		canClick = false;
-		lastClick = time;
+	//Reset button
+	if(e.offsetX >= canvas.width - 86 &&
+	   e.offsetX <= canvas.width - 86 + 77 &&
+	   e.offsetY >= 7 &&
+	   e.offsetY <= 44)
+	   {
+		allShapes = [];
+		timeTillDrop = FPS * 5;
+		filled = false;
+		canClick = true;
+		time = 0;
+		lastClick = 0;
+		score = 0;
 		randomizeShape();
 		randomizeColor();
-	}
+	   }
+	   else
+	   {
+		if(canClick && !filled)
+		{
+			//add shape locations to list
+			allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:nextShape,color:nextColor,id:idNum,canMove:true});
+			idNum++;
+			canClick = false;
+			timeTillDrop = FPS * 5;
+			lastClick = time;
+			randomizeShape();
+			randomizeColor();
+		}
+	   }
 },false);
-document.querySelector("#btnReset").onclick = function(e)
-{
-	allShapes = [];
-	filled = false;
-	time = 0;
-	lastClick = 0;
-};
 let FPS = 60;
 
 setInterval(function()
@@ -119,13 +133,26 @@ function draw()
 	{
 		ctx.font = "25px Arial";
 		ctx.textAlign = "center";
-		ctx.fillText("AREA FULL",canvas.width / 2,50);
+		ctx.fillText("AREA FULL",canvas.width / 2,83.5);
 	}
+
+	//Score
+	ctx.font = "20px Arial";
+	ctx.textAlign = "left";
+	ctx.fillText("Score: " + score,10,32);
+
+	//Time Left
+	ctx.font = "20px Arial";
+	ctx.textAlign = "center";
+	ctx.fillText("Drops In: " + parseFloat(timeTillDrop / FPS).toFixed(2),canvas.width / 2,32);
+
+	//Line1
 	ctx.beginPath();
 	ctx.moveTo(0,100);
 	ctx.lineTo(canvas.width,100);
 	ctx.stroke();
 
+	//Line2
 	ctx.beginPath();
 	ctx.moveTo(0,50);
 	ctx.lineTo(canvas.width,50);
@@ -134,6 +161,14 @@ function draw()
 	//Crane
 	ctx.drawImage(img,(Math.floor(mouseX/50) * 50) + 10,85);
 	
+	//Reset Button
+	ctx.fillStyle = 'lightgray';
+	ctx.fillRect(canvas.width - 85, 8,75,35)
+	ctx.textAlign = "center";
+	ctx.fillStyle = 'black';
+	ctx.strokeRect(canvas.width - 86,7,77,37);
+	ctx.fillText("Reset",canvas.width - 50,32);
+
 	//Current Shape
 	ctx.globalAlpha = 0.3;
 	if(nextShape === "square")
@@ -170,11 +205,29 @@ function draw()
 function update()
 {
 	time++;
+	if(timeTillDrop <= 0 && !filled)
+	{
+		//add shape locations to list
+		allShapes.push({x:Math.floor(mouseX/50) * 50,y:100,type:nextShape,color:nextColor,id:idNum,canMove:true});
+		idNum++;
+		canClick = false;
+		timeTillDrop = FPS * 5;
+		lastClick = time;
+		randomizeShape();
+		randomizeColor();
+	}
 	if(time - lastClick >= clickDelay)
 	{
 		canClick = true;
 	}
-
+	if(filled)
+	{
+		timeTillDrop = 0;
+	}
+	else
+	{
+		timeTillDrop--;
+	}
 	let resetLoop = false;
 	for(let i = 0; i < allShapes.length;i++)
 	{
@@ -270,6 +323,7 @@ function update()
 										}
 									}
 									resetLoop = true;
+									score += 3;
 									break;
 								}
 							}
@@ -310,6 +364,7 @@ function update()
 										}
 									}
 									resetLoop = true;
+									score += 5;
 									break;
 								}
 							}
@@ -349,6 +404,7 @@ function update()
 											allShapes.splice(s,1);
 										}
 									}
+									score += 7;
 									resetLoop = true;
 									break;
 								}
@@ -390,6 +446,7 @@ function update()
 										}
 									}
 									resetLoop = true;
+									score += 7;
 									break;
 								}
 							}
