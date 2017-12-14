@@ -42,7 +42,7 @@ canvas.addEventListener('click',function(e)
 	}
 },false);
 document.querySelector("#btnReset").onclick = function(e){allShapes = [];};
-var FPS = 30;
+var FPS = 60;
 
 setInterval(function()
 {
@@ -75,7 +75,7 @@ function draw()
 	ctx.stroke();
 
 	//Crane
-	ctx.drawImage(img,mouseX,85);
+	ctx.drawImage(img,(Math.floor(mouseX/50) * 50) + 10,85);
 	for(let i = 0; i < allShapes.length; i++)
 	{
 		drawRect(allShapes[i].x,allShapes[i].y,allShapes[i].color);
