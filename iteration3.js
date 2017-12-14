@@ -127,6 +127,22 @@ function draw()
 
 	//Crane
 	ctx.drawImage(img,(Math.floor(mouseX/50) * 50) + 10,85);
+	
+	//Current Shape
+	ctx.globalAlpha = 0.3;
+	if(nextShape === "square")
+	{
+		drawRect((Math.floor(mouseX/50) * 50),100,nextColor);
+	}
+	else if(nextShape === "triangle")
+	{
+		drawTri((Math.floor(mouseX/50) * 50),100,nextColor);
+	}
+	else if(nextShape === "circle")
+	{
+		drawCir((Math.floor(mouseX/50) * 50),100,nextColor);
+	}
+	ctx.globalAlpha = 1.0;
 
 	//Draws shapes
 	for(let i = 0; i < allShapes.length; i++)
@@ -400,6 +416,7 @@ function drawTri(x,y,color)
 	ctx.moveTo(x + 25,y);
 	ctx.lineTo(x + 50,y + 50);
 	ctx.lineTo(x,y + 50);
+	ctx.closePath();
 	ctx.fill();
 	ctx.fillStyle = 'black';
 	ctx.stroke();
