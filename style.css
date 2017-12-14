@@ -81,4 +81,10 @@ footer
 {
     margin: 0 auto;
     display: block;
+    margin-bottom: 10px;
+}
+#body
+{
+    width: 80%;
+    margin: 0 auto;
 }
