@@ -69,3 +69,8 @@ footer
     padding-bottom: 5px;
     background-color: seagreen;
 }
+#main
+{
+    margin: 0 auto;
+    display: block;
+}
