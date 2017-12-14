@@ -120,17 +120,12 @@ function update()
 			{
 				canMoveDown = false;
 			}
-			if(!canMoveDown && allShapes[i].y + 51 === allShapes[j].y - 1)
+			if(!canMoveDown)
 			{
-				allShapes[i].y += 1;
-				if(allShapes[i].y <= 105)
+				if(allShapes[i].y + 51 === allShapes[j].y - 1)
 				{
-					filled = true;
+					allShapes[i].y += 1;
 				}
-				break;
-			}
-			else if(!canMoveDown)
-			{
 				if(allShapes[i].y <= 105)
 				{
 					filled = true;
