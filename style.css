@@ -13,10 +13,14 @@ body
 #iteration1, #iteration2, #iteration3
 {
     width: 30%;
-    background-color: red;
     margin: 0 auto;
     height: 100%;
     color: black;
+}
+#iteration1:hover, #iteration2:hover, #iteration3:hover
+{
+    background-color: white;
+    cursor: pointer;
 }
 .heading
 {
