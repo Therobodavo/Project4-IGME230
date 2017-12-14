@@ -10,7 +10,7 @@ document.querySelector("#iteration3").onclick = function(e)
 {
     window.location = "iteration3.html";
 };
-document.querySelector(".header").onclick = function(e)
+document.querySelector(".heading").onclick = function(e)
 {
     window.location = "index.html";
 };

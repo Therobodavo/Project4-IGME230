@@ -63,7 +63,7 @@ function randomizeShape()
 	}
 }
 
-document.querySelector(".header").onclick = function(e)
+document.querySelector(".heading").onclick = function(e)
 {
     window.location = "index.html";
 };

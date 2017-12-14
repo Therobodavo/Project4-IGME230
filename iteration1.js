@@ -8,7 +8,7 @@
 	let time = 0;
 	let canClick = true;
 	
-	document.querySelector(".header").onclick = function(e)
+	document.querySelector(".heading").onclick = function(e)
 	{
 		window.location = "index.html";
 	};
