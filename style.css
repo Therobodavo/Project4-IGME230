@@ -11,6 +11,13 @@ body
     margin: 0 auto;
     text-align: center;
 }
+#btnReset
+{
+    width: 100px;
+    height: 20px;
+    margin: 0 auto;
+    display:block;
+}
 #iteration1, #iteration2, #iteration3
 {
     width: 30%;
