@@ -15,39 +15,50 @@ let filled = false;
 let idNum = 0;
 
 //Creates first color and shape
-let nextColor = Math.round(Math.random() * 4);
-let nextShape = Math.round(Math.random() * 3);
+let nextColor;
+let nextShape;
 
 //Sets first color
-if(nextColor === 0 || nextColor === 4)
-{
-	nextColor = 'red';
-}
-else if(nextColor === 1)
-{
-	nextColor = 'green';
-}
-else if(nextColor === 2)
-{
-	nextColor = 'blue';
-}
-else if(nextColor === 3)
-{
-	nextColor = 'orange';
-}
+randomizeColor();
 
 //Sets first shape
-if(nextShape === 0 || nextShape === 3)
+randomizeShape();
+
+function randomizeColor()
 {
-	nextShape = "square";
+	nextColor = Math.round(Math.random() * 4);
+	if(nextColor === 0 || nextColor === 4)
+	{
+		nextColor = 'red';
+	}
+	else if(nextColor === 1)
+	{
+		nextColor = 'green';
+	}
+	else if(nextColor === 2)
+	{
+		nextColor = 'blue';
+	}
+	else if(nextColor === 3)
+	{
+		nextColor = 'orange';
+	}
 }
-else if(nextShape === 1)
+function randomizeShape()
 {
-	nextShape = "triangle";
-}
-else if(nextShape === 2)
-{
-	nextShape = "circle";
+	nextShape = Math.round(Math.random() * 3);
+	if(nextShape === 0 || nextShape === 3)
+	{
+		nextShape = "square";
+	}
+	else if(nextShape === 1)
+	{
+		nextShape = "triangle";
+	}
+	else if(nextShape === 2)
+	{
+		nextShape = "circle";
+	}
 }
 
 canvas.addEventListener('mousemove',function(e)
@@ -114,6 +125,8 @@ function draw()
 
 	//Crane
 	ctx.drawImage(img,(Math.floor(mouseX/50) * 50) + 10,85);
+
+	//Draws shapes
 	for(let i = 0; i < allShapes.length; i++)
 	{
 		if(allShapes[i].type === "square")
@@ -122,11 +135,11 @@ function draw()
 		}
 		else if(allShapes[i].type === "triangle")
 		{
-
+			drawTri(allShapes[i].x,allShapes[i].y,allShapes[i].color);
 		}
 		else if(allShapes[i].type === "circle")
 		{
-
+			drawCir(allShapes[i].x,allShapes[i].y,allShapes[i].color);
 		}
 	}
 }
@@ -377,4 +390,19 @@ function drawRect(x,y,color)
 	ctx.fillRect(x,y,50,50);
 	ctx.fillStyle = 'black';
 	ctx.strokeRect(x - 1,y - 1,52,52);
+}
+function drawTri(x,y,color)
+{
+	ctx.fillStyle = color;
+	ctx.beginPath();
+	ctx.moveTo(x + 25,y);
+	ctx.lineTo(x + 50,y + 50);
+	ctx.lineTo(x,y + 50);
+	ctx.fill();
+	ctx.fillStyle = 'black';
+	ctx.stroke();
+}
+function drawCir(x,y,color)
+{
+	ctx.fillStyle = color;
 }
