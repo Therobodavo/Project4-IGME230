@@ -95,6 +95,10 @@ footer
     width: 80%;
     margin: 0 auto;
 }
+#Sources
+{
+    display: inline-block;
+}
 a
 {
     text-decoration: none;
