@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
 body
 {
     background-color: lightgrey;
     height: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 #iterations
 {
@@ -70,21 +73,29 @@ footer
     padding: 5px;
     background-color: seagreen;
     text-align: center;
+    border-radius: 25px;
 }
 .headingBack
 {
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: seagreen;
+    border-radius: 25px;
 }
 #main
 {
     margin: 0 auto;
     display: block;
     margin-bottom: 10px;
+    border-style: solid;
+    border-color: black;
 }
 #body
 {
     width: 80%;
     margin: 0 auto;
+}
+a
+{
+    text-decoration: none;
 }
