@@ -11,6 +11,7 @@ var img = new Image();
 img.src = "crane.svg";
 let mouseX = 0;
 let mouseY = 0;
+let filled = false;
 
 canvas.addEventListener('mousemove',function(e)
 {
@@ -20,10 +21,10 @@ canvas.addEventListener('mousemove',function(e)
 
 canvas.addEventListener('click',function(e)
 {
-	if(canClick)
+	if(canClick && !filled)
 	{
-		let color = Math.round(Math.random() * 3);
-		if(color === 0 || color === 3)
+		let color = Math.round(Math.random() * 4);
+		if(color === 0 || color === 4)
 		{
 			color = 'red';
 		}
@@ -35,13 +36,23 @@ canvas.addEventListener('click',function(e)
 		{
 			color = 'blue';
 		}
+		else if(color === 3)
+		{
+			color = 'orange';
+		}
 		//add shape locations to list
 		allShapes.push({x:Math.floor(e.offsetX/50) * 50,y:100,type:"square",color:color});
 		canClick = false;
 		lastClick = time;
 	}
 },false);
-document.querySelector("#btnReset").onclick = function(e){allShapes = [];};
+document.querySelector("#btnReset").onclick = function(e)
+{
+	allShapes = [];
+	filled = false;
+	time = 0;
+	lastClick = 0;
+};
 var FPS = 60;
 
 setInterval(function()
@@ -58,7 +69,7 @@ function draw()
 	ctx.fillRect(0,0,canvas.width,canvas.height);
 
 	//Set color for clicking area
-	if(canClick)
+	if(canClick && !filled)
 	{
 		ctx.fillStyle = '#96df96';
 	}
@@ -66,9 +77,15 @@ function draw()
 	{
 		ctx.fillStyle = '#df7866'
 	}
-	
 	ctx.fillRect(0,0,canvas.width,100);
 	ctx.fillStyle = 'black';
+
+	if(filled)
+	{
+		ctx.font = "25px Arial";
+		ctx.textAlign = "center";
+		ctx.fillText("AREA FULL",canvas.width / 2,50);
+	}
 	ctx.beginPath();
 	ctx.moveTo(0,100);
 	ctx.lineTo(canvas.width,100);
@@ -106,10 +123,18 @@ function update()
 			if(!canMoveDown && allShapes[i].y + 51 === allShapes[j].y - 1)
 			{
 				allShapes[i].y += 1;
+				if(allShapes[i].y <= 105)
+				{
+					filled = true;
+				}
 				break;
 			}
 			else if(!canMoveDown)
 			{
+				if(allShapes[i].y <= 105)
+				{
+					filled = true;
+				}
 				break;
 			}
 		}
