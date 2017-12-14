@@ -405,4 +405,9 @@ function drawTri(x,y,color)
 function drawCir(x,y,color)
 {
 	ctx.fillStyle = color;
+	ctx.beginPath();
+	ctx.arc(x + 25, y + 25,25,0,2 * Math.PI,false);
+	ctx.fill();
+	ctx.fillStyle = 'black';
+	ctx.stroke();
 }
